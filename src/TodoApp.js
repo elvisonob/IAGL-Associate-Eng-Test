@@ -1,12 +1,23 @@
-import React from "react";
-import TodoList from "./component/TodoList";
-import "./styles.css";
+import { Fragment, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchRequest } from './store/index.js';
 
-export default function TodoApp() {
+import TodoList from './component/TodoList.js';
+import TodoText from './component/TodoText.js';
+import './index.css';
+
+const App = () => {
+  // const dispatchFn = useDispatch();
+
+  // useEffect(() => {
+  //   dispatchFn(fetchRequest());
+  // }, [dispatchFn]);
   return (
-    <div className="todo-app">
-      <h1>Todo List</h1>
+    <Fragment>
+      <TodoText />
       <TodoList />
-    </div>
+    </Fragment>
   );
-}
+};
+
+export default App;
