@@ -12,7 +12,6 @@ const TodoText = (props) => {
 
   const onHandleSubmit = (e) => {
     e.preventDefault();
-    // if todotext is empty, alert'please add a todo'
     if (!todoText.trim()) {
       alert('Please type a Todo');
       return;

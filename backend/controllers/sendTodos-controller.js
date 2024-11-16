@@ -6,9 +6,13 @@ let todos = [
 
 const sendTodos = (req, res, next) => {
   const { todo } = req.body;
-  const newTodo = { id: Date.now(), todo }; // Generate ID and create todo
-  todos.push(newTodo); // Assume `todos` is your in-memory todo array
-  res.status(201).json(newTodo); // Respond with the new todo
+
+  if (!todo || todo.trim() === '') {
+    return res.status(400).json({ message: 'Todo cannot be empty' }); // Respond with an error
+  }
+  const newTodo = { id: Date.now(), todo };
+  todos.push(newTodo);
+  res.status(201).json(newTodo);
 };
 
 exports.sendTodos = sendTodos;
