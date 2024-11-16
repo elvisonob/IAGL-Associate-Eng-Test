@@ -24,11 +24,11 @@ const uiOperations = createSlice({
     },
 
     todoList(state, action) {
-      state.todoContent = action.payload; // Replace the state with fetched todos
+      state.todoContent = action.payload;
     },
 
     addTodo(state, action) {
-      state.todoContent.push(action.payload); // Add new todo to state
+      state.todoContent.push(action.payload);
     },
 
     removeTodo(state, action) {
@@ -39,29 +39,6 @@ const uiOperations = createSlice({
     },
   },
 });
-
-export const fetchRequest = () => {
-  return async (dispatch) => {
-    const fetchData = async () => {
-      const response = await fetch('http://localhost:9091/api/todo/');
-
-      if (!response.ok) {
-        throw new Error('Could not load data');
-      }
-
-      const data = await response.json();
-      return data;
-    };
-    try {
-      const todoData = await fetchData();
-      console.log('Fetched data:', todoData);
-
-      dispatch(uiActions.todoList(todoData));
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
 
 export const addTodoRequest = (todoText) => {
   return async (dispatch) => {
@@ -83,7 +60,7 @@ export const addTodoRequest = (todoText) => {
     };
     try {
       const newTodo = await addData();
-      dispatch(uiActions.addTodo(newTodo)); // Add the newly created todo to Redux state
+      dispatch(uiActions.addTodo(newTodo));
     } catch (error) {
       console.log(error);
     }

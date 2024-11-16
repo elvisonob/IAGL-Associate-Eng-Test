@@ -1,28 +1,36 @@
-.todo-app {
-    font-family: sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-
-/** add todo **/
-
-.add-todo {
-    margin-left: 0.5rem;
+.todo-container {
+    justify-items: center;
+    margin-top: 20px;
 }
 
+form {
+    margin-top: 10px;
+    display: grid;
+    grid-template-rows: 30px 30px 30px;
+}
 
-/** todo list **/
+button {
+    margin-top: 10px;
+}
 
-.todo-list {
-    margin-top: 1rem;
-    text-align: left;
+h2 {
+    margin-top: 30px;
+}
+
+.displayList2 {
+    justify-items: center;
     list-style: none;
+    grid-template-columns: 100px 100px;
+    padding: 15px;
 }
 
-
-/** todo item **/
-
-.todo-item {
-    font-family: monospace;
-    cursor: pointer;
-    line-height: 1.5;
+.displayList {
+    justify-items: center;
+    list-style: none;
 }

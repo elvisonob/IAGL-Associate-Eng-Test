@@ -1,17 +1,24 @@
-import axios from "axios";
-import { FETCH_TODOS } from "./types";
+import { uiActions } from '../store/index';
 
-export function fetchTodos() {
-  return function(dispatch) {
-    return axios.get("http://localhost:9091/api/todo").then(({ data }) => {
-      dispatch(setTodos(data));
-    });
-  };
-}
+export const fetchRequest = () => {
+  return async (dispatch) => {
+    const fetchData = async () => {
+      const response = await fetch('http://localhost:9091/api/todo/');
 
-function setTodos(data) {
-  return {
-    type: FETCH_TODOS,
-    payload: data
+      if (!response.ok) {
+        throw new Error('Could not load data');
+      }
+
+      const data = await response.json();
+      return data;
+    };
+    try {
+      const todoData = await fetchData();
+      console.log('Fetched data:', todoData);
+
+      dispatch(uiActions.todoList(todoData));
+    } catch (error) {
+      console.log(error);
+    }
   };
-}
+};
