@@ -1,34 +1,31 @@
-import React, {Component} from "react";
-import Todo from "./Todo";
-import {fetchTodos} from "../actions";
-import {connect} from "react-redux";
+import { useSelector, useDispatch } from 'react-redux';
+import { uiActions } from './../store/index.js';
 
-class TodoList extends Component {
-  state = {};
+const TodoList = () => {
+  const todoList = useSelector((state) => state.uiReducer.todoContent);
+  const dispatchFn = useDispatch();
+  //if no todoItem, update it 'No todo added yet'
+  return (
+    <div className="displayList">
+      <h2>List of Added Todos</h2>
+      {todoList.length === 0 ? (
+        <p>No todo added yet</p>
+      ) : (
+        <ul>
+          {todoList.map((eachItem) => (
+            <div className="displayList2" key={eachItem.id}>
+              <li>{eachItem.todo}</li>
+              <button
+                onClick={() => dispatchFn(uiActions.removeTodo(eachItem.id))}
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+};
 
-  componentDidMount() {
-    this.props.fetchTodos();
-  }
-
-  render() {
-    const {todos} = this.props.data;
-    return (<ul className="todo-list">
-      {todos && todos.length
-        ? todos.map((todo, index) => {
-          return <Todo key={`todo-${index}`} todo={todo.task}/>;
-        })
-        : "No todos, yay!"}
-    </ul>);
-  }
-}
-
-const mapStateToProps = ({data = {}, isLoadingData = false}) => ({
-  data,
-  isLoadingData
-});
-export default connect(
-  mapStateToProps,
-  {
-    fetchTodos
-  }
-)(TodoList);
+export default TodoList;
