@@ -1,22 +1,7 @@
-const items = [
-  {
-    id: 'm1',
-    todo: 'Implement a user story',
-  },
-
-  {
-    id: 'm2',
-    todo: 'Organize a standup meeting',
-  },
-
-  {
-    id: 'm3',
-    todo: 'Write codes for the sprint',
-  },
-];
+const items = require('../items');
 
 const getAllTodos = (req, res, next) => {
-  res.send(items);
+  res.status(200).json(items);
 };
 
 exports.getAllTodos = getAllTodos;

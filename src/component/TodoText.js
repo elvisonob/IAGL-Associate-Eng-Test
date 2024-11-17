@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { uiActions, addTodoRequest } from './../store/index.js';
+import { addTodoRequest } from './../actions/index.js';
+import { uiActions } from './../store/index.js';
 
 const TodoText = (props) => {
   const todoText = useSelector((state) => state.uiReducer.text);

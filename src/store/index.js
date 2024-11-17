@@ -1,5 +1,4 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 import thunk from 'redux-thunk';
 import rootReducer from '../reducers';
@@ -46,55 +45,11 @@ const uiOperations = createSlice({
         message: action.payload.message,
       };
     },
+    clearNotification(state) {
+      state.notification = null;
+    },
   },
 });
-
-export const addTodoRequest = (todoText) => {
-  return async (dispatch) => {
-    const addData = async () => {
-      const response = await fetch('http://localhost:9091/api/todo/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ todo: todoText }),
-      });
-
-      if (!response.ok) {
-        dispatch(
-          uiActions.showNotification({
-            title: 'Sending todo',
-            message: 'Could not send todo',
-            status: 'error',
-          })
-        );
-      }
-
-      dispatch(
-        uiActions.showNotification({
-          title: 'success',
-          message: 'Todo added',
-          status: 'success',
-        })
-      );
-
-      const data = await response.json();
-      return data;
-    };
-    try {
-      const newTodo = await addData();
-      dispatch(uiActions.addTodo(newTodo));
-    } catch (error) {
-      dispatch(
-        uiActions.showNotification({
-          title: 'Sending todo',
-          message: 'Could not add todo',
-          status: 'error',
-        })
-      );
-    }
-  };
-};
 
 export const uiActions = uiOperations.actions;
 
