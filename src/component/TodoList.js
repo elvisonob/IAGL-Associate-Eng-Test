@@ -9,7 +9,7 @@ const TodoList = () => {
     <div className="displayList">
       <h2>List of Added Todos</h2>
       {todoList.length === 0 ? (
-        <p>No todo added yet</p>
+        <p className="no-todos">No todo added yet</p>
       ) : (
         <ul>
           {todoList.map((eachItem) => (

@@ -91,6 +91,10 @@ button:hover {
   list-style: none;
 }
 
+.no-todos {
+  padding-top: 20px;
+}
+
 .displayList2 {
   background-color: #fff;
   padding: 15px;
